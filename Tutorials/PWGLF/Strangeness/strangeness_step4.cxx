@@ -186,10 +186,7 @@ struct strangeness_tutorial {
       soa::Filtered<soa::Join<aod::CascDatas, aod::McCascLabels>> const&
           Cascades,
       soa::Filtered<soa::Join<aod::V0Datas, aod::McV0Labels>> const& V0s,
-      aod::V0Datas const&,  // it's needed to access the full table of V0s (not
-                            // the filtered one) to make sure all the V0s
-                            // related to cascades are present
-      aod::V0sLinked const&, DaughterTracks const&, aod::McParticles const&) {
+      DaughterTracks const&, aod::McParticles const&) {
     // Fill the event counter
     rEventSelection.fill(HIST("hVertexZRec"), collision.posZ());
 
@@ -255,16 +252,9 @@ struct strangeness_tutorial {
 
     // Cascades
     for (const auto& casc : Cascades) {
-      const auto& v0index = casc.v0_as<aod::V0sLinked>();
-      if (!(v0index.has_v0Data())) {
-        continue;  // skip those cascades for which V0 doesn't exist
-      }
-
-      const auto& v0Casc = v0index.v0Data();  // de-reference index to correct
-                                              // v0data in case it exists
       const auto& bachDaughterTrackCasc = casc.bachelor_as<DaughterTracks>();
-      const auto& posDaughterTrackCasc = v0Casc.posTrack_as<DaughterTracks>();
-      const auto& negDaughterTrackCasc = v0Casc.negTrack_as<DaughterTracks>();
+      const auto& posDaughterTrackCasc = casc.posTrack_as<DaughterTracks>();
+      const auto& negDaughterTrackCasc = casc.negTrack_as<DaughterTracks>();
 
       rXi.fill(HIST("hMassXi"), casc.mXi());
 
