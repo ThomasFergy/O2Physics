@@ -35,12 +35,16 @@ struct strangeness_tutorial {
 
   // Configurable for event selection
   Configurable<float> cutzvertex{"cutzvertex", 10.0f, "Accepted z-vertex range (cm)"};
-
+  Configurable<float> k0MassLow{"k0MassLow",0.45f, "Low mass cut for K0"};
+  Configurable<float> k0MassHigh{"k0MassHigh",0.55f, "High mass cut for K0"};
   void init(InitContext const&)
   {
     // Axes
-    AxisSpec K0ShortMassAxis = {200, 0.45f, 0.55f, "#it{M}_{inv} [GeV/#it{c}^{2}]"};
+    AxisSpec K0ShortMassAxis = {nBins, 0.45f, 0.55f, "#it{M}_{inv} [GeV/#it{c}^{2}]"};
     AxisSpec vertexZAxis = {nBins, -15., 15., "vrtx_{Z} [cm]"};
+    AxisSpec ptAxis = {nBins, 0.0f, 10.0f, "#it{p}_{T} (GeV/#it{c})"};
+    AxisSpec LambdaMassAxis = {nBins, 1.06f, 1.164f, "#it{M}_{inv} [GeV/#it{c}^{2}]"};
+
 
     // Histograms
     // Event selection
@@ -48,6 +52,10 @@ struct strangeness_tutorial {
 
     // K0s reconstruction
     rKzeroShort.add("hMassK0Short", "hMassK0Short", {HistType::kTH1F, {K0ShortMassAxis}});
+    rKzeroShort.add("hMassLambda",  "hMassLambda",  {HistType::kTH1F, {LambdaMassAxis }});
+    rKzeroShort.add("hPtK0ShortSelected", "hPtK0ShortSelected", {HistType::kTH1F, {{ptAxis}}});
+    rKzeroShort.add("hPtLambdaSelected", "hPtLambdaSelected", {HistType::kTH1F, {{ptAxis}}});
+
   }
 
   // Defining filters for events (event selection)
@@ -63,6 +71,10 @@ struct strangeness_tutorial {
 
     for (const auto& v0 : V0s) {
       rKzeroShort.fill(HIST("hMassK0Short"), v0.mK0Short());
+      rKzeroShort.fill(HIST("hMassLambda"), v0.mLambda());
+      rKzeroShort.fill(HIST("hPtK0ShortSelected"), v0.pt());
+      rKzeroShort.fill(HIST("hPtLambdaSelected"), v0.pt());
+
     }
   }
 };
