@@ -62,10 +62,10 @@ struct strangeness_tutorial {
                     {HistType::kTH1F, {K0ShortMassAxis}});
     rKzeroShort.add("hMassLambda", "hMassLambda",
                     {HistType::kTH1F, {LambdaMassAxis}});
-    rKzeroShort.add("hPtK0ShortSelected", "hPtK0ShortSelected",
-                    {HistType::kTH1F, {{ptAxis}}});
-    rKzeroShort.add("hPtLambdaSelected", "hPtLambdaSelected",
-                    {HistType::kTH1F, {{ptAxis}}});
+    rKzeroShort.add("hMassAntiLambda", "hMassAntiLambda",
+                    {HistType::kTH1F, {LambdaMassAxis}});
+    // rKzeroShort.add("hPtK0ShortSelected", "hPtK0ShortSelected",
+    //                 {HistType::kTH1F, {{ptAxis}}});
   }
 
   // Defining filters for events (event selection)
@@ -84,8 +84,9 @@ struct strangeness_tutorial {
     for (const auto& v0 : V0s) {
       rKzeroShort.fill(HIST("hMassK0Short"), v0.mK0Short());
       rKzeroShort.fill(HIST("hMassLambda"), v0.mLambda());
-      rKzeroShort.fill(HIST("hPtK0ShortSelected"), v0.pt());
-      rKzeroShort.fill(HIST("hPtLambdaSelected"), v0.pt());
+      rKzeroShort.fill(HIST("hMassAntiLambda"), v0.mAntiLambda());
+      // rKzeroShort.fill(HIST("hPtK0ShortSelected"), v0.pt());
+      // rKzeroShort.fill(HIST("hPtLambdaSelected"), v0.pt());
     }
   }
 };
