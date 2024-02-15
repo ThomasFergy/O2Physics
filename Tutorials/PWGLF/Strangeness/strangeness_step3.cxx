@@ -122,17 +122,33 @@ struct strangeness_tutorial {
     // Lambda
     rLambda.add("hMassLambda", "hMassLambda",
                 {HistType::kTH1F, {LambdaMassAxis}});
+    rLambda.add("hMassAntiLambda", "hMassAntiLambda",
+                {HistType::kTH1F, {LambdaMassAxis}});
     rLambda.add("hMassLambdaSelected", "hMassLambdaSelected",
                 {HistType::kTH1F, {LambdaMassAxis}});
-    // rLambda.add("hMassLambdaSelectedTruePions",
-    // "hMassK0ShortSelectedTruePions", {HistType::kTH1F, {{200, 0.45f,
-    // 0.55f}}});
     rLambda.add("hMassLambdaTrueRec", "hMassLambdaTrueRec",
+                {HistType::kTH1F, {LambdaMassAxis}});
+
+    rLambda.add("hMassLambdaIndvTrueRec", "hMassLambdaIndvTrueRec",
+                {HistType::kTH1F, {LambdaMassAxis}});
+    // antiLambda
+    rLambda.add("hMassAntiLambdaSelected", "hMassAntiLambdaSelected",
+                {HistType::kTH1F, {LambdaMassAxis}});
+    rLambda.add("hMassAntiLambdaIndvTrueRec", "hMassAntiLambdaIndvTrueRec",
                 {HistType::kTH1F, {LambdaMassAxis}});
     // Pt
     rLambda.add("hPtLambdaSelected", "hPtLambdaSelected",
                 {HistType::kTH1F, {{ptAxis}}});
     rLambda.add("hPtLambdaTrueRec", "hPtLambdaTrueRec",
+                {HistType::kTH1F, {{ptAxis}}});
+
+    // lambda pt
+    rLambda.add("hPtLambdaIndvTrueRec", "hPtLambdaIndvTrueRec",
+                {HistType::kTH1F, {{ptAxis}}});
+    // antiLambda pt
+    rLambda.add("hPtAntiLambdaSelected", "hPtAntiLambdaSelected",
+                {HistType::kTH1F, {{ptAxis}}});
+    rLambda.add("hPtAntiLambdaIndvTrueRec", "hPtAntiLambdaIndvTrueRec",
                 {HistType::kTH1F, {{ptAxis}}});
 
     // Generated level histograms
@@ -143,6 +159,10 @@ struct strangeness_tutorial {
     rGenParticles.add("hPtK0ShortGen2", "hPtK0ShortGen2",
                       {HistType::kTH2F, {ptAxis, K0ShortMassAxis}});
     rGenParticles.add("hPtLambdaGen", "hPtLambdaGen",
+                      {HistType::kTH1F, {{ptAxis}}});
+
+    // add antilambda to rGenParticles
+    rGenParticles.add("hPtAntiLambdaGen", "hPtAntiLambdaGen",
                       {HistType::kTH1F, {{ptAxis}}});
   }
 
@@ -203,6 +223,12 @@ struct strangeness_tutorial {
         rLambda.fill(HIST("hMassLambdaSelected"), v0.mLambda());
         rLambda.fill(HIST("hPtLambdaSelected"), v0.pt());
       }
+      // antiLambda
+      if (lambdaMassLow < v0.mAntiLambda() &&
+          v0.mAntiLambda() < lambdaMassHigh) {
+        rLambda.fill(HIST("hMassAntiLambdaSelected"), v0.mAntiLambda());
+        rLambda.fill(HIST("hPtAntiLambdaSelected"), v0.pt());
+      }
     }
   }
   // Defining the type of the daughter tracks
@@ -229,6 +255,7 @@ struct strangeness_tutorial {
 
       rKzeroShort.fill(HIST("hMassK0Short"), v0.mK0Short());
       rLambda.fill(HIST("hMassLambda"), v0.mLambda());
+      rLambda.fill(HIST("hMassAntiLambda"), v0.mAntiLambda());
       rKzeroShort.fill(HIST("hDCAV0Daughters"), v0.dcaV0daughters());
       rKzeroShort.fill(HIST("hV0CosPA"), v0.v0cosPA());
 
@@ -245,6 +272,11 @@ struct strangeness_tutorial {
       if (lambdaMassLow < v0.mLambda() && v0.mLambda() < lambdaMassHigh) {
         rLambda.fill(HIST("hMassLambdaSelected"), v0.mLambda());
         rLambda.fill(HIST("hPtLambdaSelected"), v0.pt());
+      }
+      if (lambdaMassLow < v0.mAntiLambda() &&
+          v0.mAntiLambda() < lambdaMassHigh) {
+        rLambda.fill(HIST("hMassAntiLambdaSelected"), v0.mAntiLambda());
+        rLambda.fill(HIST("hPtAntiLambdaSelected"), v0.pt());
       }
 
       // Filling the PID of the V0 daughters in the region of the K0 peak
@@ -295,6 +327,23 @@ struct strangeness_tutorial {
           // rLambda.fill(HIST("hPtLambdaTrueRec2"), v0.pt()); // To mimic
           // distribution after the signal extraction
         }
+        // antilambda
+        if (v0mcParticle.pdgCode() == -3122) {  // AntiLambda
+          rLambda.fill(HIST("hMassAntiLambdaIndvTrueRec"), v0.mAntiLambda());
+          rLambda.fill(
+              HIST("hPtAntiLambdaIndvTrueRec"),
+              v0.pt());  // To mimic distribution after the signal extraction
+          // rLambda.fill(HIST("hPtAntiLambdaTrueRec2"), v0.pt()); // To mimic
+          // distribution after the signal extraction
+        }
+        if (v0mcParticle.pdgCode() == 3122) {  // Lamba
+          rLambda.fill(HIST("hMassLambdaIndvTrueRec"), v0.mAntiLambda());
+          rLambda.fill(
+              HIST("hPtLambdaIndvTrueRec"),
+              v0.pt());  // To mimic distribution after the signal extraction
+          // rLambda.fill(HIST("hPtAntiLambdaTrueRec2"), v0.pt()); // To mimic
+          // distribution after the signal extraction
+        }
       }
     }
   }
@@ -315,6 +364,9 @@ struct strangeness_tutorial {
       }
       if (mcParticle.pdgCode() == 3122) {
         rGenParticles.fill(HIST("hPtLambdaGen"), mcParticle.pt());
+      }
+      if (mcParticle.pdgCode() == -3122) {
+        rGenParticles.fill(HIST("hPtAntiLambdaGen"), mcParticle.pt());
       }
     }
   }
