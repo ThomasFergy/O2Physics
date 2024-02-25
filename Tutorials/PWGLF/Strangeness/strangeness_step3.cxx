@@ -154,19 +154,9 @@ struct strangeness_tutorial {
     // Lambda
     rLambda.add("hMassLambda", "hMassLambda",
                 {HistType::kTH1F, {LambdaMassAxis}});
-    rLambda.add("hMassAntiLambda", "hMassAntiLambda",
-                {HistType::kTH1F, {LambdaMassAxis}});
     rLambda.add("hMassLambdaSelected", "hMassLambdaSelected",
                 {HistType::kTH1F, {LambdaMassAxis}});
     rLambda.add("hMassLambdaTrueRec", "hMassLambdaTrueRec",
-                {HistType::kTH1F, {LambdaMassAxis}});
-
-    rLambda.add("hMassLambdaIndvTrueRec", "hMassLambdaIndvTrueRec",
-                {HistType::kTH1F, {LambdaMassAxis}});
-    // antiLambda
-    rLambda.add("hMassAntiLambdaSelected", "hMassAntiLambdaSelected",
-                {HistType::kTH1F, {LambdaMassAxis}});
-    rLambda.add("hMassAntiLambdaIndvTrueRec", "hMassAntiLambdaIndvTrueRec",
                 {HistType::kTH1F, {LambdaMassAxis}});
     // Pt
     rLambda.add("hPtLambdaSelected", "hPtLambdaSelected",
@@ -280,12 +270,6 @@ struct strangeness_tutorial {
                                v0.mAntiLambda());
         rLambdaAntiLambda.fill(HIST("hPtLambdaAntiLambdaSelected"), v0.pt());
       }
-      // antiLambda
-      if (lambdaMassLow < v0.mAntiLambda() &&
-          v0.mAntiLambda() < lambdaMassHigh) {
-        rLambda.fill(HIST("hMassAntiLambdaSelected"), v0.mAntiLambda());
-        rLambda.fill(HIST("hPtAntiLambdaSelected"), v0.pt());
-      }
     }
   }
   // Defining the type of the daughter tracks
@@ -349,11 +333,6 @@ struct strangeness_tutorial {
                                v0.mAntiLambda());
         rLambdaAntiLambda.fill(HIST("hPtLambdaAntiLambdaSelected"), v0.pt());
       }
-      if (lambdaMassLow < v0.mAntiLambda() &&
-          v0.mAntiLambda() < lambdaMassHigh) {
-        rLambda.fill(HIST("hMassAntiLambdaSelected"), v0.mAntiLambda());
-        rLambda.fill(HIST("hPtAntiLambdaSelected"), v0.pt());
-      }
 
       // Filling the PID of the V0 daughters in the region of the K0 peak
       if (k0MassLow < v0.mK0Short() && v0.mK0Short() < k0MassHigh) {
@@ -414,23 +393,6 @@ struct strangeness_tutorial {
                                  v0.mAntiLambda());
           rLambdaAntiLambda.fill(HIST("hPtLambdaAntiLambdaTrueRec"), v0.pt());
         }
-        // antilambda
-        if (v0mcParticle.pdgCode() == -3122) {  // AntiLambda
-          rLambda.fill(HIST("hMassAntiLambdaIndvTrueRec"), v0.mAntiLambda());
-          rLambda.fill(
-              HIST("hPtAntiLambdaIndvTrueRec"),
-              v0.pt());  // To mimic distribution after the signal extraction
-          // rLambda.fill(HIST("hPtAntiLambdaTrueRec2"), v0.pt()); // To mimic
-          // distribution after the signal extraction
-        }
-        if (v0mcParticle.pdgCode() == 3122) {  // Lamba
-          rLambda.fill(HIST("hMassLambdaIndvTrueRec"), v0.mAntiLambda());
-          rLambda.fill(
-              HIST("hPtLambdaIndvTrueRec"),
-              v0.pt());  // To mimic distribution after the signal extraction
-          // rLambda.fill(HIST("hPtAntiLambdaTrueRec2"), v0.pt()); // To mimic
-          // distribution after the signal extraction
-        }
       }
     }
   }
@@ -460,9 +422,6 @@ struct strangeness_tutorial {
         rGenParticles.fill(HIST("hPtAntiLambdaGen"), mcParticle.pt());
         // Add antilambdas to the LambdaAntiLambda histogram
         rGenParticles.fill(HIST("hPtLambdaAntiLambdaGen"), mcParticle.pt());
-      }
-      if (mcParticle.pdgCode() == -3122) {
-        rGenParticles.fill(HIST("hPtAntiLambdaGen"), mcParticle.pt());
       }
     }
   }
