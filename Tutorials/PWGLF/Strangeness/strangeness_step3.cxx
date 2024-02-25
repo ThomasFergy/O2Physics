@@ -136,6 +136,8 @@ struct strangeness_tutorial {
                     {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
     rKzeroShort.add("hV0Radius", "hV0Radius",
                     {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+    rKzeroShort.add("hDCAV0ToPV", "hDCAV0ToPV",
+                    {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
 
     // Lambdas topological/PID cuts
     rLambda.add("hDCAV0Daughters", "hDCAV0Daughters",
@@ -147,6 +149,8 @@ struct strangeness_tutorial {
                 {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
     rLambda.add("hV0Radius", "hV0Radius",
                 {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+    rLambda.add("hDCAV0ToPV", "hDCAV0ToPV",
+                {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
 
     rAntiLambda.add("hDCAV0Daughters", "hDCAV0Daughters",
                     {HistType::kTH1F, {{55, 0.0f, 2.2f}}});
@@ -157,6 +161,8 @@ struct strangeness_tutorial {
     rAntiLambda.add("hDCANegPV", "hDCANegPV",
                     {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
     rAntiLambda.add("hV0Radius", "hV0Radius",
+                    {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+    rAntiLambda.add("hDCAV0ToPV", "hDCAV0ToPV",
                     {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
 
     // LambdaAntiLambda
@@ -276,6 +282,7 @@ struct strangeness_tutorial {
         rKzeroShort.fill(HIST("hDCAPosPV"), v0.dcapostopv());
         rKzeroShort.fill(HIST("hDCANegPV"), v0.dcanegtopv());
         rKzeroShort.fill(HIST("hV0Radius"), v0.v0radius());
+        rKzeroShort.fill(HIST("hDCAV0ToPV"), v0.dcav0topv());
       }
       // lambda only
       if (lambdaMassLow < v0.mLambda() && v0.mLambda() < lambdaMassHigh) {
@@ -286,6 +293,7 @@ struct strangeness_tutorial {
         rLambda.fill(HIST("hDCAPosPV"), v0.dcapostopv());
         rLambda.fill(HIST("hDCANegPV"), v0.dcanegtopv());
         rLambda.fill(HIST("hV0Radius"), v0.v0radius());
+        rLambda.fill(HIST("hDCAV0ToPV"), v0.dcav0topv());
 
         // Add lambdas to the LambdaAntiLambda histogram
         rLambdaAntiLambda.fill(HIST("hMassLambdaAntiLambdaSelected"),
@@ -302,6 +310,7 @@ struct strangeness_tutorial {
         rAntiLambda.fill(HIST("hDCAPosPV"), v0.dcapostopv());
         rAntiLambda.fill(HIST("hDCANegPV"), v0.dcanegtopv());
         rAntiLambda.fill(HIST("hV0Radius"), v0.v0radius());
+        rAntiLambda.fill(HIST("hDCAV0ToPV"), v0.dcav0topv());
 
         // Add antilambdas to the LambdaAntiLambda histogram
         rLambdaAntiLambda.fill(HIST("hMassLambdaAntiLambdaSelected"),
@@ -357,6 +366,7 @@ struct strangeness_tutorial {
         rLambda.fill(HIST("hDCAPosPV"), v0.dcapostopv());
         rLambda.fill(HIST("hDCANegPV"), v0.dcanegtopv());
         rLambda.fill(HIST("hV0Radius"), v0.v0radius());
+        rLambda.fill(HIST("hDCAV0ToPV"), v0.dcav0topv());
 
         // Add lambdas to the LambdaAntiLambda histogram
         rLambdaAntiLambda.fill(HIST("hMassLambdaAntiLambdaSelected"),
@@ -373,6 +383,7 @@ struct strangeness_tutorial {
         rAntiLambda.fill(HIST("hDCAPosPV"), v0.dcapostopv());
         rAntiLambda.fill(HIST("hDCANegPV"), v0.dcanegtopv());
         rAntiLambda.fill(HIST("hV0Radius"), v0.v0radius());
+        rAntiLambda.fill(HIST("hDCAV0ToPV"), v0.dcav0topv());
 
         // Add antilambdas to the LambdaAntiLambda histogram
         rLambdaAntiLambda.fill(HIST("hMassLambdaAntiLambdaSelected"),
@@ -390,6 +401,7 @@ struct strangeness_tutorial {
         rKzeroShort.fill(HIST("hDCAPosPV"), v0.dcapostopv());
         rKzeroShort.fill(HIST("hDCANegPV"), v0.dcanegtopv());
         rKzeroShort.fill(HIST("hV0Radius"), v0.v0radius());
+        rKzeroShort.fill(HIST("hDCAV0ToPV"), v0.dcav0topv());
       }
       // for lambdas this is more complicated
       if (posDaughterTrack.has_mcParticle() &&
