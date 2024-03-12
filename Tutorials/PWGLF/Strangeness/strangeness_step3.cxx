@@ -127,43 +127,44 @@ struct strangeness_tutorial {
 
     // K0s topological/PID cuts
     rKzeroShort.add("hDCAV0Daughters", "hDCAV0Daughters",
-                    {HistType::kTH1F, {{55, 0.0f, 2.2f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 2.0f}}});
     rKzeroShort.add("hV0CosPA", "hV0CosPA",
-                    {HistType::kTH1F, {{100, 0.95f, 1.f}}});
+                    {HistType::kTH1F, {{100, 0.95f, 1.0f}}});
     rKzeroShort.add("hDCAPosPV", "hDCAPosPV",
-                    {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 5.0f}}});
     rKzeroShort.add("hDCANegPV", "hDCANegPV",
-                    {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 5.0f}}});
     rKzeroShort.add("hV0Radius", "hV0Radius",
-                    {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 50.0f}}});
     rKzeroShort.add("hDCAV0ToPV", "hDCAV0ToPV",
-                    {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 10.0f}}});
 
     // Lambdas topological/PID cuts
     rLambda.add("hDCAV0Daughters", "hDCAV0Daughters",
-                {HistType::kTH1F, {{55, 0.0f, 2.2f}}});
-    rLambda.add("hV0CosPA", "hV0CosPA", {HistType::kTH1F, {{100, 0.95f, 1.f}}});
+                {HistType::kTH1F, {{100, 0.0f, 2.0f}}});
+    rLambda.add("hV0CosPA", "hV0CosPA",
+                {HistType::kTH1F, {{100, 0.95f, 1.0f}}});
     rLambda.add("hDCAPosPV", "hDCAPosPV",
-                {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
+                {HistType::kTH1F, {{100, 0.0f, 5.0f}}});
     rLambda.add("hDCANegPV", "hDCANegPV",
-                {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
+                {HistType::kTH1F, {{100, 0.0f, 5.0f}}});
     rLambda.add("hV0Radius", "hV0Radius",
-                {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+                {HistType::kTH1F, {{100, 0.0f, 50.0f}}});
     rLambda.add("hDCAV0ToPV", "hDCAV0ToPV",
-                {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+                {HistType::kTH1F, {{100, 0.0f, 10.0f}}});
 
     rAntiLambda.add("hDCAV0Daughters", "hDCAV0Daughters",
-                    {HistType::kTH1F, {{55, 0.0f, 2.2f}}});
+                    {HistType::kTH1F, {{55, 0.0f, 2.0f}}});
     rAntiLambda.add("hV0CosPA", "hV0CosPA",
-                    {HistType::kTH1F, {{100, 0.95f, 1.f}}});
+                    {HistType::kTH1F, {{100, 0.95f, 1.0f}}});
     rAntiLambda.add("hDCAPosPV", "hDCAPosPV",
-                    {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 5.0f}}});
     rAntiLambda.add("hDCANegPV", "hDCANegPV",
-                    {HistType::kTH1F, {{100, 0.0f, 0.3f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 5.0f}}});
     rAntiLambda.add("hV0Radius", "hV0Radius",
-                    {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 50.0f}}});
     rAntiLambda.add("hDCAV0ToPV", "hDCAV0ToPV",
-                    {HistType::kTH1F, {{100, 0.0f, 100.0f}}});
+                    {HistType::kTH1F, {{100, 0.0f, 10.0f}}});
 
     // LambdaAntiLambda
     rLambdaAntiLambda.add("hMassLambdaAntiLambda", "hMassLambdaAntiLambda",
